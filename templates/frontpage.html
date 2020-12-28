@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block header %}{% endblock %}
+{% block hreflang %}{% endblock %}
+{% block main %}
+<div class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="column column-33 column-offset-33"><img src="{{ '/static/img/arnalf-deneas.svg'|url }}"></div>
+        </div>
+    </div>
+</div>
+<main class="container frontpage">
+    <nav class="language-switcher">
+        <ul>
+            {% for alt_ in config.ALTERNATIVES %}
+                {% set lang = config.ALTERNATIVES[alt_]['name']['en'] %}
+                {% if alt == alt_ %}<li><strong>{{ lang }}</strong></li>{% endif %}
+                {% if alt != alt_ %}<li><a rel="alternate" hreflang="{{ alt_ }}" href="{{ '.'|url(alt=alt_) }}">{{ lang }}</a></li>{% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <h1>Arnalf &amp; Deneas</h1>
+    <p>{{ this.description }}</p>
+
+    {% set books = this.children.filter(F._id=='books').first() %}
+    <h2>{{ books.title }}</h2>
+    {% for book in this.children.filter(F._id=='books').first().children.order_by('_id') %}
+        <h3><a href="{{ book|url }}">{{ book.title }} {{ book.subtitle }}</a></h3>
+    {% endfor %}
+</main>
+<aside class="container frontpage">
+    <nav class="links">
+    <ul>
+        <li><a href="https://www.instagram.com/arnalfdeneas" class="ion-social-instagram">{{ this.instagram }}</a></li>
+        <li><a href="mailto:arnalf@arnalf-deneas.com" class="ion-email">{{ this.email }}</a></li>
+        <li><a href="{{ site.get('/signup', alt=alt) | url }}" class="ion-social-rss">{{ this.newsletter }}</a></li>
+    </ul>
+</aside>
+{% endblock %}

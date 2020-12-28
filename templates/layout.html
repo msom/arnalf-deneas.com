@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="{{ alt }}">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Marc Sommerhalder, Valérie Bürgy" />
+		<meta name="description" content="Arnalf & Deneas. {{ site.get_root(alt=alt).description }}">
+		<meta name="keywords" content="Comic, Alternative Comic, Graphic Novel, Free, Children's and Youth, Adventure, Fantasy" />
+		{% block hreflang %}
+			{% for alt_ in config.ALTERNATIVES %}
+				{% if alt != alt_ %}<link rel="alternate" hreflang="{{ alt_ }}" href="{{ '.'|url(alt=alt_) }}" />{% endif %}
+			{% endfor %}
+		{% endblock %}
+		<title>Arnalf &amp; Deneas{% block subtitle %}{% endblock %}</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="{{ '/static/apple-touch-icon.png'|url }}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ '/static/favicon-32x32.png'|url }}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{{ '/static/favicon-16x16.png'|url }}">
+		<link rel="manifest" href="{{ '/static/manifest.json'|url }}">
+		<link rel="mask-icon" href="{{ '/static/safari-pinned-tab.svg'|url }}" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+		<link rel="stylesheet" href="{{ '/static/css/normalize.css'|asseturl }}">
+		<link rel="stylesheet" href="{{ '/static/css/ionicons.min.css'|asseturl }}">
+        <link rel="stylesheet" href="{{ '/static/css/milligram.min.css'|asseturl }}">
+        <link rel="stylesheet" href="{{ '/static/css/main.css'|asseturl }}">
+		{% block include_scripts %}{% endblock %}
+	</head>
+	<body>
+        {% block header %}
+        <header>
+			<img src="{{ '/static/img/arnalf.svg'|url }}">
+			<h1><a href="{{ site.get_root(alt=alt)|url }}">Arnalf &amp; Deneas</a></h1>
+			<img src="{{ '/static/img/deneas.svg'|url }}">
+			{% block languages %}
+			{% if config.ALTERNATIVES|length > 1 %}
+			<nav class="language-switcher">
+				<ul>
+					{% for alt_ in config.ALTERNATIVES %}
+						{% set lang = config.ALTERNATIVES[alt_]['name']['en'] %}
+						{% if alt == alt_ %}<li><strong>{{ alt_ }}</strong></li>{% endif %}
+						{% if alt != alt_ %}<li><a rel="alternate" hreflang="{{ alt_ }}" href="{{ '.'|url(alt=alt_) }}">{{ alt_ }}</a></li>{% endif %}
+					{% endfor %}
+				</ul>
+			</nav>
+			{% endif %}
+			{% endblock %}
+		</header>
+        {% endblock %}
+        {% block main %}{% endblock %}
+		{% set about = site.get_root(alt=alt).children.filter(F._id=='about').first() %}
+	  	<footer><a href="{{ about | url }}">&copy; Marc Sommerhalder &amp; Valérie Bürgy</a></footer>
+	</body>
+</html>

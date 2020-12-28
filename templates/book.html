@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block main %}
+<main class="container book">
+  <h1>{{ this.title }}</h1>
+  <h2>{{ this.subtitle }}</h2>
+
+  <div class="container">
+    <div class="row">
+      <div class="column">
+          {% set cover = this.attachments.images.filter(F._id=='cover.png').first() %}
+          {% if cover %}
+          <img class="cover" src="{{ cover.thumbnail(width=300)|url }}">
+          {% endif %}
+      </div>
+        <div class="column">
+            <p class="description">{{ this.description }}</p>
+            <p>
+                {% if this.isbn10 %}ISBN-10: {{ this.isbn10 }}<br>{% endif %}
+                {% if this.isbn13 %}ISBN-13: {{ this.isbn13 }}<br>{% endif %}
+            </p>
+            <p>
+                <strong><a href="mailto:arnalf@arnalf-deneas.com?subject={{ this.title | urlencode }} {{ this.subtitle | urlencode }}">E-Mail</a></strong><br>
+                {% if this.amazon_com.host %}<strong><a href="{{ this.amazon_com }}">Amazon.com</a></strong><br>{% endif %}
+                {% if this.amazon_de.host %}<strong><a href="{{ this.amazon_de }}">Amazon.de</a></strong><br>{% endif %}
+                {% if this.blurb.host %}<strong><a href="{{ this.blurb }}">Blurb</a></strong><br>{% endif %}
+                {% if this.epubli.host %}<strong><a href="{{ this.epubli }}">ePubli</a></strong><br>{% endif %}
+            </p>
+        </div>
+      </div>
+    </div>
+ </main>
+{% endblock %}

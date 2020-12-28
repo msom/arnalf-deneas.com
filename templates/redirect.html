@@ -1,0 +1,5 @@
+{% if target %}
+<meta http-equiv="refresh" content="0;url={{ target }}">
+{% else %}
+<meta http-equiv="refresh" content="0;url={{ site.root|url }}">
+{% endif %}

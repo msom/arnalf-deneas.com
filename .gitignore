@@ -1,0 +1,11 @@
+.DS_Store
+Pipfile
+Pipfile.lock
+include
+lib
+bin
+env
+.python-version
+.Python
+settings.py
+__pycache__
