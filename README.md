@@ -15,4 +15,11 @@ Install the environment
 
 Serve locally
 
-    lektor server
+    env/bin/lektor server
+
+## Deploying
+
+Deploy
+
+    env/bin/lektor build
+    env/bin/lektor deploy

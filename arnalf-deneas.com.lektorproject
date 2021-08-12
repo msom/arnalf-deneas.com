@@ -11,3 +11,6 @@ locale = de_CH
 name = English
 url_prefix = /en/
 locale = en_US
+
+[servers.ghpages]
+target = ghpages://msom/arnalf-deneas.com
