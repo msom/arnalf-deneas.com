@@ -8,18 +8,18 @@ Install the dependencies
 
 Install the environment
 
-    python -m venv env
-    env/bin/pip install lektor
+    python -m venv venv
+    venv/bin/pip install lektor
 
 ## Running
 
 Serve locally
 
-    env/bin/lektor server
+    venv/bin/lektor server
 
 ## Deploying
 
 Deploy
 
-    env/bin/lektor build
-    env/bin/lektor deploy
+    venv/bin/lektor build
+    venv/bin/lektor deploy

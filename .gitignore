@@ -5,6 +5,7 @@ include
 lib
 bin
 env
+venv
 .python-version
 .Python
 settings.py
